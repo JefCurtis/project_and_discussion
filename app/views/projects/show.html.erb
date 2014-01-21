@@ -1,0 +1,17 @@
+<br>
+<h3><%= "Project ##{@project.id}: #{@project.title}" %></h3>
+
+<p>Description: <%= @project.body %></p>
+<p>Hit count: <%= @project.hit_count %></p>
+<p>Like count: <%= @project.like_count %></p>
+
+<% if session[:project_id].present? && session[:project_id].include?(@project_id) %>
+	<%= link_to "Liked", "javascript:void(0);", disabled: "disabled", class: "btn btn-primary" %>
+<% else %>
+	<%= link_to "Like", like_project_path(@project), class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "edit", edit_project_path, class: "btn btn-primary"%>
+<%= link_to "delete", project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+<hr>
+<%= link_to "All projects", projects_path, class: "btn btn-primary" %>

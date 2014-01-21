@@ -1,0 +1,25 @@
+<hr>
+<%= form_for @discussion do |f| %>
+	<% if @discussion.errors.any? %>
+	<div class="error_explanation">
+		<ul>
+			<% @discussion.errors.full_messages.each do |e| %>
+				<li><%= e %></li>
+			<% end %>
+		</ul>	
+	</div>
+
+	<% end %>
+<%= f.label :title %>
+<%= f.text_field :title, class: "form-control" %>
+<br />
+<div class="form-group">
+<%= f.label :description %>
+<%= f.text_area :description, class: "form-control" %>
+<br />
+</div>
+	<%= f.submit "Submit", class: "btn btn-primary" %>
+	<%= link_to "Cancel", discussions_path, class: "btn btn-primary" %>
+<% end %>
+<hr>
+<%= link_to "All discussions", discussions_path, class: "btn btn-primary" %>

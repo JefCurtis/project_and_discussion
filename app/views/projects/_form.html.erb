@@ -1,0 +1,23 @@
+<hr>
+<%= form_for @project do |f| %>
+	<% if @project.errors.any? %>
+	<ul class="error_explanation">
+		<% @project.errors.full_messages.each do |e| %>
+			<li><%= e %></li>
+		<% end %>
+	</ul>	
+
+	<% end %>
+<%= f.label :title %>
+<%= f.text_field :title, class: "form-control" %>
+<br />
+<div class="form-group">
+<%= f.label :body %>
+<%= f.text_area :body, class: "form-control" %>
+<br />
+</div>
+	<%= f.submit "Submit", class: "btn btn-primary" %>
+	<%= link_to "Cancel", projects_path, class: "btn btn-primary" %>
+<% end %>
+<hr>
+<%= link_to "All projects", projects_path, class: "btn btn-primary" %>

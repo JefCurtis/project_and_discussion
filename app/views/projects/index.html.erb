@@ -1,0 +1,11 @@
+<h3>Current projects:</h3>
+<hr>
+  <% @projects.each do |project| %>
+  <p><%= link_to "Title: #{project.title}", project %></p> 
+  <p>Description:  <%= project.body %></p>
+  <p>Hit count: <%= project.hit_count %></p>
+  <p>Like count:	<%= project.like_count %></p>
+  <hr>
+  <% end %>
+<%= link_to "Create new project", new_project_path, class: "btn btn-primary" %>
+

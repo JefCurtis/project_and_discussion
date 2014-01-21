@@ -1,0 +1,9 @@
+<h3>Discussions: </h3>
+<hr>
+	<% @discussions.each do |discussion| %>
+  <p><%= link_to "Title: #{discussion.title}", discussion %></p> 
+  <p>Description:  <%= discussion.description %></p>
+  <hr>
+  <% end %>
+<%= link_to "Create new discussion", new_discussion_path, class: "btn btn-primary" %>
+
