@@ -1,6 +1,8 @@
 class DiscussionsController < ApplicationController
 		before_action :set_discussion, only: [:show, :edit, :update, :destroy ]
 
+	layout "discussion"
+
 	def index
 		@discussions = Discussion.all
 	end

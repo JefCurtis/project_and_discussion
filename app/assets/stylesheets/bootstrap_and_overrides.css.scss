@@ -4,3 +4,15 @@
 	padding: 2px;
 	color: red;
 }
+
+.bold_line {
+	border: none;
+	height: 8px;
+	/* Set the hr color */
+ 	color: #006dcc; //old IE
+	background-color: #006dcc; 
+}	
+
+.container {
+	padding-bottom: 15px;
+}

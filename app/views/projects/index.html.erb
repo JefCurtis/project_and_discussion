@@ -1,11 +1,23 @@
-<h3>Current projects:</h3>
+<h2>Current projects:</h2>
 <hr>
+	<h3>Most recent projects on the go:</h3>
+	<% @newest_projects.each do |project| %>
+  	<p><%= link_to "Title: #{project.title}", project %></p> 
+  	<p>Description:  <%= project.body %></p>
+  	<p>Hit count: <%= project.hit_count %></p>
+  	<p>Like count:	<%= project.like_count %></p>
+  	<p>Created:	<%= project.created_at %></p>
+
+  	<hr>
+	<% end %>
+	<hr class="bold_line">
+	<h3>Most popular projects:</h3>
   <% @projects.each do |project| %>
-  <p><%= link_to "Title: #{project.title}", project %></p> 
-  <p>Description:  <%= project.body %></p>
-  <p>Hit count: <%= project.hit_count %></p>
-  <p>Like count:	<%= project.like_count %></p>
-  <hr>
+  	<p><%= link_to "Title: #{project.title}", project %></p> 
+  	<p>Description:  <%= project.body %></p>
+  	<p>Hit count: <%= project.hit_count %></p>
+  	<p>Like count:	<%= project.like_count %></p>
+  	<hr>
   <% end %>
 <%= link_to "Create new project", new_project_path, class: "btn btn-primary" %>
 
