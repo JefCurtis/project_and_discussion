@@ -5,10 +5,10 @@
 <p>Hit count: <%= @project.hit_count %></p>
 <p>Like count: <%= @project.like_count %></p>
 
-<% if session[:project_id].present? && session[:project_id].include?(@project_id) %>
+<% if session[:project_id].present? && session[:project_id].include?(@project.id) %>
 	<%= link_to "Liked", "javascript:void(0);", disabled: "disabled", class: "btn btn-primary" %>
 <% else %>
-	<%= link_to "Like", like_project_path(@project), class: "btn btn-primary" %>
+	<%= link_to "Like", like_project_path(@project.id), class: "btn btn-primary" %>
 <% end %>
 
 <%= link_to "edit", edit_project_path, class: "btn btn-primary"%>

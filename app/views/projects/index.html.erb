@@ -2,7 +2,7 @@
 <hr>
 	<h3>Most recent projects on the go:</h3>
 	<% @newest_projects.each do |project| %>
-  	<p><%= link_to "Title: #{project.title}", project %></p> 
+  	<p id="project-title"><%= link_to "Title: #{project.title}", project %></p> 
   	<p>Description:  <%= project.body %></p>
   	<p>Hit count: <%= project.hit_count %></p>
   	<p>Like count:	<%= project.like_count %></p>
@@ -20,4 +20,8 @@
   	<hr>
   <% end %>
 <%= link_to "Create new project", new_project_path, class: "btn btn-primary" %>
-
+<% if session[:is_logged_in] %>
+  <%= link_to "logout", logout_users_path, class: "btn btn-primary" %>
+<% else %>
+  <%= link_to "Login", login_users_path, class: "btn btn-primary" %>
+<% end %>

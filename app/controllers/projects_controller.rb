@@ -1,22 +1,23 @@
 class ProjectsController < ApplicationController
-	before_action :check_for_id?, only: [:create]
+	#before_action :check_for_id?, only: [:create]
 	before_action :set_project, only: [:show, :edit, :update, :destroy, :like, :print_id]
 	before_action :print_id, except: [:index, :new, :create ]
 
 	def index
-		@projects = Project.order(hit_count: :desc)
-		@newest_projects = Project.limit(3).order(created_at: :desc)
+		@newest_projects = Project.top_three.by_hit_count
+		@projects = Project.all_but(@newest_projects.collect(&:id)).ten
 	end
 
-#Stretch: simulate user login by creating user controller that has login / logout custom actions.
-# Add a callback to projects controller that redirect to listing if they try to create and they are not logged in
-
 	def create
-		@project = Project.new(project_params)
-		if @project.save
-			redirect_to projects_path
-		else 
-			render :new
+		if session[:is_logged_in]
+			@project = Project.new(project_params)
+			if @project.save
+				redirect_to projects_path
+			else 
+				render :new
+			end
+		else
+				redirect_to projects_path
 		end
 	end
 
@@ -42,9 +43,10 @@ class ProjectsController < ApplicationController
 	end
 
 	def like
+		Rails.logger.info ">>>>>>>>>>>>>>>>> #{@project.inspect} #{project_url}"
 		session[:project_id] ||= []
 		if session[:project_id].include? params[:id].to_i
-			redirect_to @project, alert: "Liked already"
+			redirect_to project_url, alert: "Liked already"
 		else
 			session[:project_id] << @project.id
 			@project.like_count += 1
@@ -60,7 +62,6 @@ class ProjectsController < ApplicationController
 
 	def newest_projects
 		@newest_projects = Project.order(created_at: :desc)
-		#redirect_to projects_path
 	end
 
 	def favorites
@@ -73,18 +74,23 @@ class ProjectsController < ApplicationController
 		Rails.logger.info "......................................."
 	end
 
+
+
 	private
 
+	def check_id?; end
+
+
 	def check_for_id?
-	if session[:is_logged_in]
-		session[:is_logged_in] = false
-		true
-	else
-		session[:is_logged_in] = true
-		redirect_to projects_path, alert: "You must be logged in to create a project."
+		if session[:is_logged_in]
+			session[:is_logged_in] = false
+			true
+		else
+			session[:is_logged_in] = true
+			redirect_to projects_path, alert: "You must be logged in to create a project."
+		end
 	end
 	
-	end
 
   def project_params
     params.require(:project).permit(:title, :body)

@@ -7,6 +7,10 @@ Projects::Application.routes.draw do
     get :top_projects, on: :collection
     get :favorites, on: :collection
   end
+  resources :users do
+    get :login, on: :collection
+    get :logout, on: :collection
+  end
   root 'projects#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
