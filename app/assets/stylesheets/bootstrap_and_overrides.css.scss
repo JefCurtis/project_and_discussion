@@ -17,3 +17,33 @@
 	padding-bottom: 15px;
 }
 
+#popular-projects {
+  float: right;
+  width: 500px;
+  border:solid 1px #C9C9C9;
+  padding: 15px;
+}
+
+#recent-projects {
+  float: left;
+  width: 500px;
+  border:solid 1px #C9C9C9;
+  padding: 15px;
+}
+
+#nav ul li {
+  padding-top: 15px;
+  float: left;
+  list-style: none;
+  // padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 20px;
+  margin-left: 0px;
+}
+
+#nav {
+  margin-left: 0px;
+  padding-left: 0px;
+  padding-bottom: 30px;
+}
+

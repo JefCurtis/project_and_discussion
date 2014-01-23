@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
   scope :by_hit_count, -> { order("hit_count DESC") }
   scope :by_like_count, -> { order("like_count DESC") }
   scope :recent, lambda { |x| order("updated_at DESC").limit(x) }
+  scope :limited, lambda { |x| limit(x) }
 
   #default_scope { order("updated_at DESC") }
 

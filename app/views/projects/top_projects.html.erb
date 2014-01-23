@@ -1,0 +1,12 @@
+<%= render "navigation" %>
+<h3>Top Projects:</h3>
+<hr class="bold-line">
+<% @projects.each do |project| %>
+  <%= render :partial => "project_info", :locals => { :project => project } %>
+<% end %>
+
+
+
+
+
+

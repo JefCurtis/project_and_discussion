@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
-	#before_action :check_for_id?, only: [:create]
 	before_action :set_project, only: [:show, :edit, :update, :destroy, :like, :print_id]
-	before_action :print_id, except: [:index, :new, :create ]
+	before_action :print_id, except: [:index, :new, :create, :top_projects ]
 
 	def index
 		@newest_projects = Project.top_three.by_hit_count
@@ -64,34 +63,19 @@ class ProjectsController < ApplicationController
 		@newest_projects = Project.order(created_at: :desc)
 	end
 
-	def favorites
-		redirect_to projects_path
-	end
-
 	def print_id
 		Rails.logger.info "......................................."
 		Rails.logger.info  "This is the id passed #{@project.id}"
 		Rails.logger.info "......................................."
 	end
 
+	def top_projects
+		@projects = Project.by_like_count.limited(3)
+	end
 
 
 	private
-
-	def check_id?; end
-
-
-	def check_for_id?
-		if session[:is_logged_in]
-			session[:is_logged_in] = false
-			true
-		else
-			session[:is_logged_in] = true
-			redirect_to projects_path, alert: "You must be logged in to create a project."
-		end
-	end
 	
-
   def project_params
     params.require(:project).permit(:title, :body)
   end
