@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
-<%= render "/layouts/flash" %>
-<%= render "/layouts/head" %>
+
+  <%= render "/layouts/head" %>
+
+  <body>
+    <div class="container">
+    <%= render "/layouts/flash" %>
+
+    <%= yield %>
+    </div>
+  </body>
 </html>

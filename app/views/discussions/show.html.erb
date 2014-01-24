@@ -3,7 +3,7 @@
 
 <p>Description: <%= @discussion.description %></p>
 
-<%= link_to "edit", edit_discussion_path, class: "btn btn-primary"%>
+<%= link_to "edit", edit_project_discussion_path, class: "btn btn-primary"%>
 <%= link_to "delete", discussion_path(@discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
 <hr>
 <%= link_to "All discussions", discussions_path, class: "btn btn-primary" %>

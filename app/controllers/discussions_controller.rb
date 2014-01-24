@@ -8,15 +8,17 @@ class DiscussionsController < ApplicationController
 	end
 
 	def show
-
 	end
 
 	def create
 		@discussion = Discussion.new(discussion_params)
+		@project = Project.find(params[:project_id])
+		@discussion.project = @project
 		if @discussion.save
-			redirect_to discussions_path
+			redirect_to @project, notice: "Thanks for the comment."
 		else
-			render :new
+			flash.now[:alert] = "Your comment couldn't be saved. Try agin."
+			render "/projects/show"
 		end
 	end
 

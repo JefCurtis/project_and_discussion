@@ -19,31 +19,85 @@
 
 #popular-projects {
   float: right;
-  width: 500px;
+  width: 50%;
   border:solid 1px #C9C9C9;
   padding: 15px;
 }
 
 #recent-projects {
   float: left;
-  width: 500px;
+  width: 50%;
   border:solid 1px #C9C9C9;
   padding: 15px;
 }
 
-#nav ul li {
-  padding-top: 15px;
-  float: left;
+// #nav ul li {
+//   padding-top: 15px;
+//   float: left;
+//   list-style: none;
+//   // padding-left: 5px;
+//   padding-right: 5px;
+//   padding-bottom: 20px;
+//   margin-left: 0px;
+  
+// }
+
+// #nav {
+//   padding-left: 0px;
+//   padding-bottom: 30px;
+// }
+
+#social-list li {
+  float: right;
   list-style: none;
-  // padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 20px;
-  margin-left: 0px;
+  margin-right: 10px; 
 }
 
-#nav {
-  margin-left: 0px;
-  padding-left: 0px;
-  padding-bottom: 30px;
+#social-list a:hover {
+  text-decoration: none;
 }
+
+#nav-parent {
+  padding-top: 30px;
+}
+
+#navigation-list {
+  width: 50%;
+  padding-top: 12px;
+  float: left;
+}
+#social-list {
+  width: 50%;
+  float: right;
+  padding-top: 12px;
+}
+
+#navigation-list li {
+  list-style: none;
+  float: left;
+  margin-right: 10px;
+}
+
+#social-list li  {
+  list-style: none;
+  float: right;
+  margin: none;
+  text-align: right;
+}
+
+#navigation-list a:hover {
+  text-decoration: none;
+}
+
+#power-on {
+  color: green;
+}
+
+#power-off {
+  color: red;
+}
+
+
+
+
 

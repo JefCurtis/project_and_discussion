@@ -1,11 +1,13 @@
 Projects::Application.routes.draw do
-  resources :discussions do
-    post :flag, on: :member
-  end
+
+  get "/gizmos/:id", controller: "projects", action: "show"
   resources :projects do
     get :like, on: :member
     get :top_projects, on: :collection
     get :favorites, on: :collection
+    resources :discussions do
+      post :flag, on: :member
+    end
   end
   resources :users do
     get :login, on: :collection

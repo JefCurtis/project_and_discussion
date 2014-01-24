@@ -1,0 +1,7 @@
+<h3>Discussions about the project: </h3>
+<hr>
+<% @project.discussions.all.each do |discussion| %>
+  <p>Title: <%= discussion.title %></p>
+  <p>Description: <%= discussion.description %></p>
+<hr>
+<% end %>

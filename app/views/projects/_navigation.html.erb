@@ -1,21 +1,14 @@
-<div id="nav">
-    <ul>
-      <li>
-        <%= link_to "Create new project", new_project_path, class: "btn btn-primary" %>
-      </li>
-      <li>
-        <% if session[:is_logged_in] %>
-          <%= link_to "logout", logout_users_path, class: "btn btn-primary" %>
-        <% else %>
-          <%= link_to "Login", login_users_path, class: "btn btn-primary" %>
-        <% end %>
-      </li>
-      <li>  
-        <%= link_to "Top projects", top_projects_projects_path, class: "btn btn-primary" %>
-      </li>
-      <li> 
-        <a class: "btn btn-primary" href="http:www.instagram.com">Instagram</a>
-      </li>
-    </ul>      
-    
-  </div>
+<div class:nav-parent>
+  <ul id="navigation-list">
+    <li>
+      <% if session[:is_logged_in] %>
+        <%= link_to "", logout_users_path, class: "fa fa-power-off fa-3x", id: "power-on" %>
+      <% else %>
+        <%= link_to "", login_users_path, class: "fa fa-power-off fa-3x", id: "power-off"  %>
+      <% end %>
+    </li>
+    <li><%= link_to "", projects_path, class: "fa fa-home fa-3x" %></li>
+    <li><%= link_to "", new_project_path, class: "fa fa-plus-circle fa-3x" %></li>
+    <li><%= link_to "Top projects", top_projects_projects_path, class: "btn btn-primary" %></li>
+  </ul>      
+</div>

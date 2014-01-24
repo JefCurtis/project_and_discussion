@@ -1,4 +1,7 @@
-<%= render "navigation" %>
+<%= render "projects/navigation" %>
+<%= render "layouts/social" %>
+<br>
+<br>
 <br>
 <h3><%= "Project ##{@project.id}: #{@project.title}" %></h3>
 
@@ -6,13 +9,43 @@
 <p>Hit count: <%= @project.hit_count %></p>
 <p>Like count: <%= @project.like_count %></p>
 
+
 <% if session[:project_id].present? && session[:project_id].include?(@project.id) %>
-	<%= link_to "Liked", "javascript:void(0);", disabled: "disabled", class: "btn btn-primary" %>
+  <%= link_to "Liked", "javascript:void(0);", disabled: "disabled", class: "btn btn-primary" %>
 <% else %>
-	<%= link_to "Like", like_project_path(@project.id), class: "btn btn-primary" %>
+  <%= link_to "Like", like_project_path(@project.id), class: "btn btn-primary" %>
 <% end %>
 
-<%= link_to "edit", edit_project_path, class: "btn btn-primary"%>
+<%= link_to "edit", edit_project_path(@project), class: "btn btn-primary"%>
 <%= link_to "delete", project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
 <hr>
-<%= link_to "All projects", projects_path, class: "btn btn-primary" %>
+
+<h3>Discussions about the project: </h3>
+<hr>
+<% @project.discussions.all.each do |discussion| %>
+  <p>Title: <%= discussion.title %></p>
+  <p>Description: <%= discussion.description %></p>
+<hr>
+<% end %>
+
+<% if @discussion.errors.any? %>
+  <div class="error_explanation">
+    <ul>
+      <% @discussion.errors.full_messages.each do |e| %>
+        <li><%= e %></li>
+      <% end %>
+    </ul> 
+  </div>
+
+  <% end %>
+
+<%= form_for [@project, @discussion] do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+    <hr>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>  
+<% end %>

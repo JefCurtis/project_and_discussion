@@ -1,19 +1,24 @@
+<%= render "layouts/social" %>
 <%= render "navigation" %>
-<h2>Current projects:</h2>
+<br>
+<br>
+<br>
 <hr>
+<h2>CURRENT PROJECTS:</h2>
   <div id="recent-projects">
     <hr class="bold_line">
-    <h3>Most recent projects on the go:</h3>
+    <h3>NEWEST PROJECT:</h3>
 
     <% @newest_projects.each do |project| %>
 
-    <%= render :partial => "project_info", :locals => { :project => project } %>
+      <%= render :partial => "project_info", :locals => { :project => project } %>
 
     <% end %>
   </div>
   <div id="popular-projects">
     <hr class="bold_line">
-    <h3>Most popular projects:</h3>
+    <h3>MOST POPULAR PROJECTS:</h3>
+    
     <% @projects.each do |project| %>
 
       <%= render :partial => "project_info", :locals => { :project => project } %>
