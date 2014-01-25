@@ -13,7 +13,26 @@ class Project < ActiveRecord::Base
   scope :recent, lambda { |x| order("updated_at DESC").limit(x) }
   scope :limited, lambda { |x| limit(x) }
 
+  before_save :capitalize_title, :capitalize_body
+  after_save :save_message
+  # before_save :capitalize_title, only: :create
 
   #default_scope { order("updated_at DESC") }
+  
+  private
+
+  def capitalize_title
+    self.title.capitalize!
+  end
+
+  def capitalize_body
+    self.body.capitalize!
+  end
+
+  def save_message
+    Rails.logger.info ">>>>>>>>>>>>>>>>>>>>>>"
+    Rails.logger.info "Saved project."
+    Rails.logger.info ">>>>>>>>>>>>>>>>>>>>>>"
+  end
 
 end

@@ -1,6 +1,6 @@
 class DiscussionsController < ApplicationController
-		before_action :set_discussion, only: [:show, :edit, :update, :destroy ]
-
+		before_action :set_project 
+		before_action :set_discussion, only: [:destroy]
 	layout "discussion"
 
 	def index
@@ -12,7 +12,6 @@ class DiscussionsController < ApplicationController
 
 	def create
 		@discussion = Discussion.new(discussion_params)
-		@project = Project.find(params[:project_id])
 		@discussion.project = @project
 		if @discussion.save
 			redirect_to @project, notice: "Thanks for the comment."
@@ -23,8 +22,11 @@ class DiscussionsController < ApplicationController
 	end
 
 	def destroy
-		@discussion.destroy
-		redirect_to discussions_path
+		if @discussion.destroy
+			redirect_to @project, notice: "Comment was deleted successfully."
+		else
+			redirect_to @project, alert: "The answer could not be deleted."
+		end
 	end
 
 	def new
@@ -32,7 +34,7 @@ class DiscussionsController < ApplicationController
 	end
 
 	def update
-				if @discussion.update(discussion_params)
+		if @discussion.update(discussion_params)
 			redirect_to @discussion
 		else
 			render :new
@@ -46,12 +48,17 @@ class DiscussionsController < ApplicationController
 	private
 
 	def set_discussion
-		@discussion = Discussion.find(params[:id])
+		@discussion = @project.discussions.find(params[:id])
 	end
+
+  def set_project
+  	@project = Project.find(params[:project_id])
+  end
 
 	def discussion_params
     params.require(:discussion).permit(:title, :description)
   end
+
 
 
 end

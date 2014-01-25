@@ -2,7 +2,7 @@
 <br>
 <br>
 <br>
-<h3><%= "Project ##{@project.id}: #{@project.title}" %></h3>
+<h3><%= "Project #{@project.id}: #{@project.title}" %></h3>
 
 <p>Description: <%= @project.body %></p>
 <p>Hit count: <%= @project.hit_count %></p>
@@ -16,14 +16,16 @@
 <% end %>
 
 <%= link_to "edit", edit_project_path(@project), class: "btn btn-primary"%>
-<%= link_to "delete", project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+<%= link_to "delete", project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 <hr>
 
 <h3>Discussions about the project: </h3>
 <hr>
 <% @project.discussions.all.each do |discussion| %>
+    
   <p>Title: <%= discussion.title %></p>
   <p>Description: <%= discussion.description %></p>
+  <%= link_to "Delete",[@project, discussion], method: :delete, data: { confirm: "Are you sure you want to delete this discussion?" }, class: "btn btn-danger" %>
 <hr>
 <% end %>
 
@@ -48,4 +50,4 @@
     <%= f.submit class: "btn btn-primary" %>
   </div>  
 <% end %>
-<%= render "layouts/social" %>
+<footer><%= render "layouts/social" %></footer>

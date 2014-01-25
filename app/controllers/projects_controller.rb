@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
 				render :new
 			end
 		else
-				redirect_to projects_path
+			redirect_to projects_path
 		end
 	end
 
@@ -26,13 +26,12 @@ class ProjectsController < ApplicationController
 	def show
 		@discussion = Discussion.new
 		@discussion.project = @project
-		
 		@project.hit_count += 1
 		@project.save
 	end
 
 	def update
-		if @project.update(project_params)
+		if @project.update_attributes(project_params)
 			redirect_to @project
 		else
 			render :new
