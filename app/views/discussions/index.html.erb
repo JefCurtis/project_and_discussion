@@ -1,9 +1,29 @@
-<h3>Discussions: </h3>
-<hr>
-	<% @discussions.each do |discussion| %>
-  <p><%= link_to "Title: #{discussion.title}", discussion %></p> 
-  <p>Description:  <%= discussion.description %></p>
-  <hr>
-  <% end %>
-<%= link_to "Create new discussion", new_discussion_path, class: "btn btn-primary" %>
 
+<h2 id="title-bar">Discussions: </h2>
+<div class="content-container">
+  <% @discussions.each do |discussion| %>
+    <p><%= discussion.description %></p>
+    <%= link_to "| edit this discussion |", edit_project_discussion_path(@project, discussion) %>
+    <%= link_to "| delete this discussion |", project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </p>
+    <hr>
+
+    <div class="well well-sm">
+      <p>COMMENTS:</p>
+      <% discussion.comments.each do |comment| %> 
+        <p><%= comment.body %></p>
+        <%= link_to "| delete this comment |", discussion_comment_path(discussion, comment),
+         method: :delete, data: { confirm: "Are you sure?" } %>
+        <%= link_to "| edit this comment |", edit_discussion_comment_path(discussion, comment) %>
+        </p>
+        <hr>
+      <% end %>
+          <p><%= link_to "| add a comment |", new_discussion_comment_path(discussion) %></p>
+    </div>
+  <% end %>
+</div>
+
+<br>
+<%= link_to "add to the discussion on this project", new_project_discussion_path(@project), class: "btn btn-primary" %>
+<%= link_to "go back to the project", project_path(@project), class: "btn btn-primary" %>
+<%= render "/layouts/social" %>

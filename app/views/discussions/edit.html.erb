@@ -1,2 +1,23 @@
 <h3>Edit your discussion:</h3>
-<%= render "form" %>
+<hr>
+<%= form_for [@project, @discussion] do |f| %>
+  
+  <% if @discussion.errors.any? %>
+  <div class="error_explanation">
+    <ul>
+      <% @discussion.errors.full_messages.each do |e| %>
+        <li><%= e %></li>
+      <% end %>
+    </ul> 
+  </div>
+
+  <% end %>
+<br />
+<div class="form-group">
+<%= f.label :description %>
+<%= f.text_area :description, class: "form-control" %>
+<br />
+</div>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>
+<hr>

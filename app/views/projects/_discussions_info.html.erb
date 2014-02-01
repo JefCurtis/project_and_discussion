@@ -1,7 +1,13 @@
 <h3>Discussions about the project: </h3>
-<hr>
-<% @project.discussions.all.each do |discussion| %>
-  <p>Title: <%= discussion.title %></p>
-  <p>Description: <%= discussion.description %></p>
-<hr>
-<% end %>
+<div class="well">
+  <% @project.discussions.limited(3).each do |discussion| %>
+    <p id="desc-title"><%= discussion.description %></p>
+
+    <p><%= link_to "| delete this discussion |", [@project, discussion], method: :delete, data: 
+    { confirm: "Are you sure you want to delete this discussion?" } %>
+      <%= link_to "| edit this discussion |", edit_project_discussion_path(@project, discussion) %>
+    <hr >
+    <% end %>
+    </p>
+  <%= link_to "See the rest of the discussion", project_discussions_path(@project), class: "btn btn-default" %>
+</div>

@@ -1,31 +1,37 @@
 class DiscussionsController < ApplicationController
+		before_filter :authenticate_user!, except: [:show, :index, :all]
 		before_action :set_project 
-		before_action :set_discussion, only: [:destroy]
-	layout "discussion"
+		before_action :set_discussion, only: [:destroy, :edit, :update, :show]
+		before_action :set_comments, only: [:show]
 
 	def index
-		@discussions = Discussion.all
+		@discussions = @project.discussions.all
 	end
 
 	def show
+		
+	end
+
+	def edit
+
 	end
 
 	def create
 		@discussion = Discussion.new(discussion_params)
 		@discussion.project = @project
 		if @discussion.save
-			redirect_to @project, notice: "Thanks for the comment."
+			redirect_to project_discussions_path(@project), notice: "Thanks for adding!."
 		else
-			flash.now[:alert] = "Your comment couldn't be saved. Try agin."
-			render "/projects/show"
+			flash.now[:alert] = "There was an error when try to add to the discussion."
+			render :edit
 		end
 	end
 
 	def destroy
 		if @discussion.destroy
-			redirect_to @project, notice: "Comment was deleted successfully."
+			redirect_to project_discussions_path(@project, @discussion), notice: "Comment was deleted successfully."
 		else
-			redirect_to @project, alert: "The answer could not be deleted."
+			redirect_to project_discussions_path(@project, @discussion), alert: "The answer could not be deleted."
 		end
 	end
 
@@ -35,9 +41,9 @@ class DiscussionsController < ApplicationController
 
 	def update
 		if @discussion.update(discussion_params)
-			redirect_to @discussion
+			redirect_to project_discussions_path(@project, @discussion)
 		else
-			render :new
+			render :edit
 		end
 	end
 
@@ -56,7 +62,11 @@ class DiscussionsController < ApplicationController
   end
 
 	def discussion_params
-    params.require(:discussion).permit(:title, :description)
+    params.require(:discussion).permit(:description)
+  end
+
+  def set_comments
+  	@comments = @discussion.comments.find(params[:comment_id])
   end
 
 

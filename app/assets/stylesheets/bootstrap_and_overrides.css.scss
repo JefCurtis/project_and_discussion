@@ -5,12 +5,15 @@
 	color: red;
 }
 
-.bold_line {
+.bold-line {
 	border: none;
 	height: 8px;
 	/* Set the hr color */
  	color: #006dcc; //old IE
 	background-color: #006dcc; 
+  margin-top:10px;
+  margin-bottom:15px;
+  padding:0px;
 }	
 
 .container {
@@ -20,14 +23,12 @@
 #popular-projects {
   float: right;
   width: 50%;
-  border:solid 1px #C9C9C9;
   padding: 15px;
 }
 
 #recent-projects {
   float: left;
   width: 50%;
-  border:solid 1px #C9C9C9;
   padding: 15px;
 }
 
@@ -41,8 +42,8 @@
   text-decoration: none;
 }
 
-#nav-parent {
-  padding-top: 30px;
+.nav-parent {
+  padding-bottom: 100px;
 }
 
 #navigation-list {
@@ -82,8 +83,32 @@
 }
 
 #title-bar {
-  float: left;
-  width: 50%;
+  padding: 0px;
+  width: 100%;
+  margin: 0px;
+}
+
+#desc-title {
+  font-size: 1.2em;
+}
+
+.content-container {
+  border:solid 2px #C9C9C9;
+  padding: 20px;
+  margin: 2px;
+  margin-top: 10px;
+
+}
+
+.task-table {
+  margin-left: 10px;
+  padding: 0px;
+
+}
+
+#task-td {
+  text-align: right;
+  margin-left: 25px;
 }
 
 

@@ -1,9 +1,7 @@
-<%= render "navigation" %>
-<h2 id="title-bar">CURRENT PROJECTS:</h2>
-<hr>
+<h2 id="title-bar">Current Projects:</h2>
   <div id="recent-projects">
-    <hr class="bold_line">
-    <h3>NEWEST PROJECT:</h3>
+    <hr class="bold-line">
+    <h3>Newest Projects:</h3>
 
     <% @newest_projects.each do |project| %>
 
@@ -12,14 +10,14 @@
     <% end %>
   </div>
   <div id="popular-projects">
-    <hr class="bold_line">
-    <h3>MOST POPULAR PROJECTS:</h3>
+    <hr class="bold-line">
+    <h3>Most Popular Projects:</h3>
     
-    <% @projects.each do |project| %>
+    <% @popular_projects.each do |project| %>
 
       <%= render :partial => "project_info", :locals => { :project => project } %>
 
     <% end %>
   </div>
-  <hr>
+
   <%= render "layouts/footer" %>

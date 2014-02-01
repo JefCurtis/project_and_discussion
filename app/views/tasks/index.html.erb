@@ -1,0 +1,20 @@
+<hr class="bold-line">
+<div class="panel panel-default">
+  <div class="panel-heading"><h3 id="title-bar"> All your tasks:</h3></div>
+    <table class="task-table">
+        <th>Task:</th>
+        <th>project:</th>
+        <th>due date:</th>
+        <th>&nbsp;</th>
+        <% @user.tasks.each do |task| %>
+      <tr>
+          <td><%= task.name %></td>
+          <td><%= "#{@project.title.truncate(60)}..." %></td>
+          <td><%= task.due_date %></td>
+          <td><%= task.is_completed %></td>
+      </tr>
+        <% end %>
+    </table>
+  </div>
+</div>
+

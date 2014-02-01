@@ -1,33 +1,30 @@
 class ProjectsController < ApplicationController
-	before_action :set_project, only: [:show, :edit, :update, :destroy, :like, :print_id]
+	before_filter :authenticate_user!, except: [:show, :index, :all]
+	before_action :set_project, only: [:show, :edit, :update, :destroy, :like, :print_id ]
 
 	def index
 		@newest_projects = Project.all.recent(3)
-		@projects = Project.all.by_hit_count.limited(3)
+		@popular_projects = Project.all.by_hit_count.limited(3)
 	end
 
 	def create
-		if session[:is_logged_in]
-			@project = Project.new(project_params)
-			if @project.save
-				redirect_to projects_path
-			else 
-				render :new
-			end
-		else
+		@project = Project.new(project_params)
+		if @project.save
 			redirect_to projects_path
+		else 
+			render :new
 		end
+	else
+		redirect_to projects_path
 	end
+	
 
 	def new
 		@project = Project.new
 	end
 
 	def show
-		@discussion = Discussion.new
-		@discussion.project = @project
 		@project.hit_count += 1
-		@project.save
 	end
 
 	def update
@@ -47,7 +44,6 @@ class ProjectsController < ApplicationController
 	end
 
 	def like
-		Rails.logger.info ">>>>>>>>>>>>>>>>> #{@project.inspect} #{project_url}"
 		session[:project_id] ||= []
 		if session[:project_id].include? params[:id].to_i
 			redirect_to project_url, alert: "Liked already"
@@ -62,6 +58,10 @@ class ProjectsController < ApplicationController
 	def destroy
 		@project.destroy
 		redirect_to projects_path, notice: "Your project has been deleted."
+	end
+
+	def all
+		@all_projects = Project.all
 	end
 
 	private

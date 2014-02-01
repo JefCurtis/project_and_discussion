@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
 	has_many :discussions, dependent: :destroy
+  has_many :tasks
 
   validates :title, presence: true, uniqueness: true, length: { minimum: 10 }
 	validates :body, presence: true 

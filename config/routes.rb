@@ -1,18 +1,28 @@
 Projects::Application.routes.draw do
 
-  get "/gizmos/:id", controller: "projects", action: "show"
+  devise_for :users
   resources :projects do
     get :like, on: :member
     get :top_projects, on: :collection
     get :favorites, on: :collection
+    get :all, on: :collection
     resources :discussions do
       post :flag, on: :member
     end
+    resources :tasks
   end
+  
+  resources :tasks, only: [:index]
+
   resources :users do
     get :login, on: :collection
     get :logout, on: :collection
   end
+  
+  resources :discussions, only: [] do
+    resources :comments
+  end
+
   root 'projects#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

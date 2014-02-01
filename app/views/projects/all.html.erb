@@ -1,0 +1,8 @@
+<h2 id="title-bar">ALL PROJECTS:</h2>
+<hr class="bold-line">
+
+<% @all_projects.each do |project| %>
+      <%= render :partial => "project_info", :locals => { :project => project } %>
+<% end %>
+
+
