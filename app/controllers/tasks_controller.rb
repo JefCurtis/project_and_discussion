@@ -4,8 +4,7 @@ class TasksController < ApplicationController
   before_action :set_project, except: [:index]
 
   def index
-    @user = current_user
-    @tasks = @user.tasks.all
+    @tasks = current_user.tasks
   end
 
   def create
@@ -44,7 +43,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :due_date, :is_completed)
+    params.require(:task).permit(:name, :due_date, :is_completed, {user_ids: []})
   end
 
 end

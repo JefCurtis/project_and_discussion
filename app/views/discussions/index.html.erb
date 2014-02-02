@@ -5,6 +5,7 @@
     <p><%= discussion.description %></p>
     <%= link_to "| edit this discussion |", edit_project_discussion_path(@project, discussion) %>
     <%= link_to "| delete this discussion |", project_discussion_path(@project, discussion), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= "| #{formatted_date discussion.updated_at} |" %>
     </p>
     <hr>
 
@@ -12,6 +13,7 @@
       <p>COMMENTS:</p>
       <% discussion.comments.each do |comment| %> 
         <p><%= comment.body %></p>
+        <p><%= formatted_date comment.updated_at %>
         <%= link_to "| delete this comment |", discussion_comment_path(discussion, comment),
          method: :delete, data: { confirm: "Are you sure?" } %>
         <%= link_to "| edit this comment |", edit_discussion_comment_path(discussion, comment) %>

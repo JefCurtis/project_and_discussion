@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @discussion.comments.new(comment_params)
     if @comment.save
-      redirect_to project_discussions_path(@discussion.project), notice: "Thanks for the comment."
+      redirect_to project_discussions_path(@discussion.project, @discussion), notice: "Thanks for the comment."
     else
       flash.now[:alert] = "Your comment couldn't be saved. Try agin."
       @project = @discussion.project

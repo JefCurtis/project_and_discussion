@@ -1,6 +1,5 @@
 <p id="project-title"><%= link_to "Title: #{project.title}", project %></p> 
 <p>Description: <%= truncate_sentence project.body %></p>
-<p>Hit count: <%= project.hit_count %></p>
-<p>Like count: <%=project.like_count %></p>
-<p>Created: <%= formatted_date project.created_at %></p>
+<p class="well well-sm">Hit count: <%= project.hit_count %>   ||   Like count: <%=project.like_count %>   ||    
+  Created: <%= formatted_date project.created_at %></p>
 <hr>

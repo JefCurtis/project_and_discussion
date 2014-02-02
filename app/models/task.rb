@@ -3,8 +3,8 @@ class Task < ActiveRecord::Base
   has_many :assignments
   has_many :users, through: :assignments
 
-  scope :only_complete, where(is_completed: true)
-  scope :only_incomplete, where(is_completed: false)
+  scope :only_complete,   -> { where(is_completed: true) }
+  scope :only_incomplete, -> { where(is_completed: false)}
 
 
 end

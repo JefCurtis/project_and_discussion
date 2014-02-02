@@ -10,7 +10,7 @@
         <% @project.tasks.each do |task| %>
       <tr>
           <td><%= task.name %></td>
-          <td><%= "#{@project.title.truncate(60)}..." %></td>
+          <td><%= "#{task.project.title.truncate(60)}..." %></td>
           <td><%= task.due_date %></td>
           <td><%= task.is_completed %></td>
       </tr>
