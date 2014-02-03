@@ -6,6 +6,9 @@ module ApplicationHelper
 
   def truncate_sentence(string)
      string.truncate(200, ommission: ("....."))
- end
+  end
 
+  def capitalize_name(name)
+    name.capitalize
+  end
 end
