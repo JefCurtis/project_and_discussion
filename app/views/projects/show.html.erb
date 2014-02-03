@@ -5,8 +5,7 @@
 
   <div  class="pull-left content-container">
     <p>Description: <%= @project.body %></p>
-    <p class="well well-sm">Hit count: <%= @project.hit_count %> || Like count: <%= @project.like_count %>  ||  
-      Created: <%= formatted_date @project.created_at %></p>
+    <p class="well well-sm">Hit count: <%= @project.hit_count %> || Like count: <%= @project.like_count %>  ||  Created: <%= formatted_date @project.created_at %></p>
 
     <%= render :partial => "/projects/project_commands", :locals => { :project => @project } %>
 
