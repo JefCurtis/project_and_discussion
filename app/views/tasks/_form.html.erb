@@ -1,0 +1,14 @@
+<hr class="bold-line">
+<div class="form-group">
+  <%= form_for [@project, @task] do |f| %>
+    <p><%= f.text_area :name, class: "form-control" %></p>
+    <%= f.label :due_date %>
+    <p><%= f.date_select :due_date, class: "form-control" %></p>
+    <%= hidden_field_tag "task[user_ids][]", nil %>
+    <% User.all.each do |user| %>
+      <%= check_box_tag "task[user_ids][]", user.id, @task.user_ids.include?(user.id), id: dom_id(user) %>
+      <%= label_tag dom_id(user), user.email %><br>
+    <% end %>
+    <p><%= f.submit "add task", class: "btn btn-default" %></p>
+  <% end %>
+</div>

@@ -1,37 +1,43 @@
 <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
   <div class="panel panel-danger">
     <div class="panel-heading">Unfinished Tasks for this project:</div>
-    <table class="task-table">
-      <% @project.tasks.only_incomplete.each do |task| %>
-        <tr>
-          <td><%="#{task.id}: " %></td>
-          <td><%= task.name.truncate(60) %></td>
-          <td id="task-td">
-              <%= form_for [@project, task] do |f| %>
-                <%= f.hidden_field :is_completed, value: !task.is_completed %>
-                <%= f.submit "mark complete", class: "btn btn-default" %>
-              <% end %>
-          </td>
-        </tr>        
-      <% end %>
-    </table>
+    <div class="panel-body">
+      <table class="table">
+        <% @project.tasks.only_incomplete.each do |task| %>
+          <tr>
+            <td><%="#{task.id}: " %></td>
+            <td><%= task.name.truncate(60) %></td>
+            <td id="task-td">
+                <%= form_for [@project, task] do |f| %>
+                  <%= f.hidden_field :redirect_to, value: @project %>
+                  <%= f.hidden_field :is_completed, value: !task.is_completed %>
+                  <%= f.submit "mark complete", class: "btn btn-default" %>
+                <% end %>
+            </td>
+          </tr>        
+        <% end %>
+      </table>
+    </div>
   </div>
   <div class="panel panel-success">
     <div class="panel-heading">Finished Tasks for this project:</div>
-    <table class="task-table">
-      <% @project.tasks.only_complete.each do |task| %>
-        <tr>
-          <td><%="#{task.id}: " %></td>
-          <td><%= task.name.truncate(60) %></td>
-          <td id="task-td">
-              <%= form_for [@project, task] do |f| %>
-                <%= f.hidden_field :is_completed, value: !task.is_completed %>
-                <%= f.submit "mark uncomplete", class: "btn btn-default" %>
-              <% end %>
-          </td>
-        </tr>        
-      <% end %>
-    </table>
+    <div class="panel-body">
+      <table class="table">
+        <% @project.tasks.only_complete.each do |task| %>
+          <tr>
+            <td><%="#{task.id}: " %></td>
+            <td><%= task.name.truncate(60) %></td>
+            <td id="task-td">
+                <%= form_for [@project, task] do |f| %>
+                  <%= f.hidden_field :redirect_to, value: @project %>
+                  <%= f.hidden_field :is_completed, value: !task.is_completed %>
+                  <%= f.submit "mark uncomplete", class: "btn btn-default" %>
+                <% end %>
+            </td>
+          </tr>        
+        <% end %>
+      </table>
+    </div>
   </div>
   <%= link_to "add a task to this project", new_project_task_path(@project), class: "btn btn-default"%>
   <%= link_to "see all your tasks", project_tasks_path(@project), class: "btn btn-default" %>

@@ -1,0 +1,10 @@
+<p> Hi <%= @user.email %>,</p>
+<br>
+<p><% "#{@sending_user.email} has added a comment to your topic:" 
+  <%= link_to @discussion.title.truncate(80), project_discussion_url(@discussion.project, @discussion) %>
+</p>
+<br>
+<p>Comment: <%= @comment.description.truncate(100) %></p>
+<br>
+<p>Regards,</p>
+<p>Project Management Team!</p>

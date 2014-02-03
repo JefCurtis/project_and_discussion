@@ -69,6 +69,4 @@ class DiscussionsController < ApplicationController
   	@comments = @discussion.comments.find(params[:comment_id])
   end
 
-
-
 end

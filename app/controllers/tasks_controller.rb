@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:destroy, :update, :edit]
   before_action :set_task, only: [:show, :edit, :destroy, :update]
   before_action :set_project, except: [:index]
 
@@ -19,13 +19,19 @@ class TasksController < ApplicationController
 
   def update
     if @task.update_attributes(task_params)
-      redirect_to @project, notice: "your task has been changed."
+      redirect_to :back
     else
-      redirect_to @project, alert: "Your task couldn't be changed."
+      redirect_to params[:redirect_to], alert: "Your task couldn't be changed."
     end
   end
 
+  def edit
+  end
+
   def destroy
+    if @task.destroy
+      redirect_to project_tasks_path, notice: "Your task has been deleted."
+    end
   end
 
   def new

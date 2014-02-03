@@ -1,20 +1,36 @@
 <hr class="bold-line">
 <div class="panel panel-default">
-  <div class="panel-heading"><h3 id="title-bar"> All your tasks:</h3></div>
-    <table class="task-table">
-        <th>Task:</th>
-        <th>project:</th>
-        <th>due date:</th>
-        <th>&nbsp;</th>
-        <% @tasks.each do |task| %>
-      <tr>
-          <td><%= task.name %></td>
-          <td><%= "#{task.project.title.truncate(60)}..." %></td>
-          <td><%= task.due_date %></td>
-          <td><%= task.is_completed %></td>
-      </tr>
-        <% end %>
-    </table>
+  <div class="panel-body">
+    <div class="panel-heading"><p> All your tasks:</p></div>
+      <table class="table">
+          <th>Task:</th>
+          <th>project:</th>
+          <th>due date:</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+        <tr>
+          <% @tasks.each do |task| %>
+            <td><%= task.name %></td>
+            <td><%= "#{task.project.title.truncate(60)}..." %></td>
+            <td><%= task.due_date %></td>
+            <td>
+              <%= form_for [task.project, task] do |f| %>
+                <%= f.hidden_field :redirect_to, value: tasks_path %>
+                <%= f.hidden_field :is_completed, value: !task.is_completed %>
+                <% if task.is_completed %>
+                  <%= f.submit "mark uncomplete", class: "btn btn-default" %>
+                <% else %>
+                  <%= f.submit "mark complete", class: "btn btn-default" %>
+                <% end %>
+              <% end %>
+            </td>
+            <td><%= link_to "edit", edit_project_task_path(task.project, task), class: "btn btn-default" %></td>
+            <td><%= link_to "delete", project_task_path(task.project, task), method: :delete,  class: "btn btn-default" %></td>
+        </tr>
+          <% end %>
+      </table>
+    </div>
   </div>
 </div>
 
